@@ -17,12 +17,15 @@ namespace blo
                                                                                     _window(window),
                                                                                     _has_fakeout(has_fakeout)
     {
+        // Hide all shark sprites at launch (fixes bug)
+        _sprite.set_visible(false);
+        _half_emerged_sprite.set_visible(false);
+        _partially_emerged_sprite.set_visible(false);
     }
 
     void shark::update()
     {
         _frames++;
-        // _sprite.set_visible(isEmerged() || isFakeout());
 
         // Check how long we have to pop the shark out of the water
         const int framesPerStage = 30;
@@ -39,7 +42,7 @@ namespace blo
             _emerge_stage = 1;
         }
         else
-        {
+        { // Checks if the shark is set up to fake out, and if the fakeout has ended
             if (_has_fakeout && _frames >= _fakeout_start + _fakeout_length)
             {
                 // After retreating, repeat the half-emerged stage.
@@ -50,10 +53,12 @@ namespace blo
             {
                 _emerge_stage = 1;
             }
+            // Stage 2 ends after 2 stages worth of frames
             else if (framesSinceEmerge < framesPerStage * 2)
             {
                 _emerge_stage = 2;
             }
+            // Stage 3 lasts for the hit window after the first 2 stages
             else if (framesSinceEmerge < framesPerStage * 2 + _window)
             {
                 _emerge_stage = 3;
