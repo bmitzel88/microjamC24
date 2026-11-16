@@ -12,10 +12,6 @@ namespace blo {
             player();
 
             void update(shark& target);
-
-            bool hasSnack() const;
-        private:
-            bool _has_snack = true;
     };
 
 }

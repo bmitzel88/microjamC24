@@ -14,25 +14,37 @@ namespace blo
          * shark constructor
          *
          * @param starting_position the location of the shark
+         * @param window the timing window
+         * @param has_fakeout if the shark will fakeout
          */
-        shark(bn::fixed_point starting_position);
+        shark(bn::fixed_point starting_position, int window, bool has_fakeout);
 
         void update();
 
-        // Punches the shark
-        void punch();
+        // Hits the shark
+        void bonk();
 
-        // Checks to see if the shark has been punched
-        bool punched() const;
+        // Checks to see if the shark has been hit
+        bool bonked() const;
+
+        // Checks to see if the shark stole the snack
+        bool snack_stolen() const;
 
         // Checks to see if the shark is fully emerged (Ready to hit)
         bool isEmerged() const;
 
-    private:
-        // The sprite to display the shark
-        bn::sprite_ptr _sprite;
-        bool _punched = false;
-        int _frames = 0;
+        // Checks to see if the shark is doing a fakeout
+        bool isFakeout() const;
 
+    private:
+        bn::sprite_ptr _sprite;
+        int _emerge_start = 180;
+        int _window;
+        bool _has_fakeout;
+        int _fakeout_start = 90;
+        int _fakeout_length = 30;
+        bool _snack_stolen = false;
+        bool _bonked = false;
+        int _frames = 0;
     };
 }
