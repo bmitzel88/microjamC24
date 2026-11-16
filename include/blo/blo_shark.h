@@ -38,6 +38,8 @@ namespace blo
 
     private:
         bn::sprite_ptr _sprite;
+        bn::sprite_ptr _partially_emerged_sprite;
+        bn::sprite_ptr _half_emerged_sprite;
         int _emerge_start = 180;
         int _window;
         bool _has_fakeout;
@@ -46,5 +48,6 @@ namespace blo
         bool _snack_stolen = false;
         bool _bonked = false;
         int _frames = 0;
+        int _emerge_stage = 0;
     };
 }

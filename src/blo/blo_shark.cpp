@@ -10,6 +10,8 @@ namespace blo
      * @param starting_position the location to start the shark at
      */
     shark::shark(bn::fixed_point starting_position, int window, bool has_fakeout) : _sprite(bn::sprite_items::shark.create_sprite(starting_position)),
+                                                                                    _half_emerged_sprite(bn::sprite_items::halfEmergedShark.create_sprite(starting_position)),
+                                                                                    _partially_emerged_sprite(bn::sprite_items::partiallyEmergedShark.create_sprite(starting_position)),
                                                                                     _window(window),
                                                                                     _has_fakeout(has_fakeout)
     {
@@ -18,7 +20,13 @@ namespace blo
     void shark::update()
     {
         _frames++;
-        _sprite.set_visible(isEmerged() || isFakeout());
+        // _sprite.set_visible(isEmerged() || isFakeout());
+
+        if (isFakeout())
+        {
+            // Change sprite back to partially emerged state
+            _sprite = bn::sprite_items::partiallyEmergedShark.create_sprite(starting_position);
+        }
     }
 
     void shark::bonk()
@@ -33,7 +41,7 @@ namespace blo
         }
     }
 
-    bool shark::snack_stolen() const
+        bool shark::snack_stolen() const
     {
         return _snack_stolen;
     }
@@ -56,9 +64,13 @@ namespace blo
         return _frames >= _emerge_start && _frames < _emerge_start + _window;
     }
 
+    /**
+     * Function that returns true if a fakeout is currently needing to happen, false if not
+     *
+     */
     bool shark::isFakeout() const
     {
-        return _has_fakeout && _frames >= _fakeout_start && _frames < _fakeout_start + _fakeout_length ;
+        return _has_fakeout && _frames >= _fakeout_start && _frames < _fakeout_start + _fakeout_length;
     }
 
 }
