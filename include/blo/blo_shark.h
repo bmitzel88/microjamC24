@@ -38,12 +38,12 @@ namespace blo
 
     private:
         bn::sprite_ptr _sprite;
-        bn::sprite_ptr _partially_emerged_sprite;
         bn::sprite_ptr _half_emerged_sprite;
+        bn::sprite_ptr _partially_emerged_sprite;
         int _emerge_start = 180;
         int _window;
         bool _has_fakeout;
-        int _fakeout_start = 90;
+        int _fakeout_start = 240;
         int _fakeout_length = 30;
         bool _snack_stolen = false;
         bool _bonked = false;
