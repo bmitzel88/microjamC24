@@ -1,8 +1,8 @@
 #include "blo/blo_shark.h"
 
-#include "bn_sprite_items_shark.h"
-#include "bn_sprite_items_partially_emerged_shark.h"
-#include "bn_sprite_items_half_emerged_shark.h"
+#include "bn_sprite_items_blo_shark.h"
+#include "bn_sprite_items_blo_partially_emerged_shark.h"
+#include "bn_sprite_items_blo_half_emerged_shark.h"
 
 namespace blo
 {
@@ -11,9 +11,9 @@ namespace blo
      *
      * @param starting_position the location to start the shark at
      */
-    shark::shark(bn::fixed_point starting_position, int window, bool has_fakeout) : _sprite(bn::sprite_items::shark.create_sprite(starting_position)),
-                                                                                    _half_emerged_sprite(bn::sprite_items::half_emerged_shark.create_sprite(starting_position)),
-                                                                                    _partially_emerged_sprite(bn::sprite_items::partially_emerged_shark.create_sprite(starting_position)),
+    shark::shark(bn::fixed_point starting_position, int window, bool has_fakeout) : _sprite(bn::sprite_items::blo_shark.create_sprite(starting_position)),
+                                                                                    _half_emerged_sprite(bn::sprite_items::blo_half_emerged_shark.create_sprite(starting_position)),
+                                                                                    _partially_emerged_sprite(bn::sprite_items::blo_partially_emerged_shark.create_sprite(starting_position)),
                                                                                     _window(window),
                                                                                     _has_fakeout(has_fakeout)
     {
