@@ -6,7 +6,6 @@
 
 namespace blo
 {
-
     class shark
     {
     public:

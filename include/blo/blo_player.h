@@ -1,17 +1,18 @@
 #pragma once
-namespace blo {
 
-    class shark;
+#include "blo_shark.h"
 
+namespace blo
+{
+    class player
+    {
+    public:
+        /**
+         * player constructor
+         */
+        player();
 
-    class player {
-        public:
-            /**
-             * player constructor
-             */
-            player();
-
-            void update(shark& target);
+        void update(shark &target);
     };
 
 }

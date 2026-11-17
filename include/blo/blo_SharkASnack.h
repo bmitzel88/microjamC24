@@ -10,7 +10,6 @@
 
 namespace blo
 {
-
     class blo_SharkASnack : public mj::game
     {
     public:
