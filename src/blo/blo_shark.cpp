@@ -1,26 +1,24 @@
 #include "blo/blo_shark.h"
 
 #include "bn_sprite_items_blo_shark.h"
-#include "bn_sprite_items_blo_partially_emerged_shark.h"
-#include "bn_sprite_items_blo_half_emerged_shark.h"
 
 namespace blo
 {
+
     /**
      * shark constructor
      *
      * @param starting_position the location to start the shark at
      */
     shark::shark(bn::fixed_point starting_position, int window, bool has_fakeout) : _sprite(bn::sprite_items::blo_shark.create_sprite(starting_position)),
-                                                                                    _half_emerged_sprite(bn::sprite_items::blo_half_emerged_shark.create_sprite(starting_position)),
-                                                                                    _partially_emerged_sprite(bn::sprite_items::blo_partially_emerged_shark.create_sprite(starting_position)),
                                                                                     _window(window),
                                                                                     _has_fakeout(has_fakeout)
     {
-        // Hide all shark sprites at launch (fixes bug)
+        // Set the shark sprite to use the first frame in the animation
+        _sprite.set_tiles(bn::sprite_items::blo_shark.tiles_item(), 0);
+
+        // Hide shark sprite at launch (fixes bug)
         _sprite.set_visible(false);
-        _half_emerged_sprite.set_visible(false);
-        _partially_emerged_sprite.set_visible(false);
     }
 
     void shark::update()
@@ -69,9 +67,30 @@ namespace blo
             }
         }
 
-        _partially_emerged_sprite.set_visible(_emerge_stage == 1);
-        _half_emerged_sprite.set_visible(_emerge_stage == 2);
-        _sprite.set_visible(_emerge_stage == 3);
+        if (_emerge_stage == 0)
+        {
+            // Hide shark sprite at emergence level 0
+            _sprite.set_visible(false);
+        }
+        // Check which shark frame to show (depending on emerge stage)
+        else if (_emerge_stage == 1)
+        {
+            // Set the shark sprite to use the first frame in the animation
+            _sprite.set_tiles(bn::sprite_items::blo_shark.tiles_item(), 0);
+            _sprite.set_visible(true);
+        }
+        else if (_emerge_stage == 2)
+        {
+            // Set the shark sprite to use the second frame in the animation
+            _sprite.set_tiles(bn::sprite_items::blo_shark.tiles_item(), 1);
+            _sprite.set_visible(true);
+        }
+        else
+        {
+            // Set the shark sprite to use the third frame in the animation
+            _sprite.set_tiles(bn::sprite_items::blo_shark.tiles_item(), 2);
+            _sprite.set_visible(true);
+        }
     }
 
     void shark::bonk()
