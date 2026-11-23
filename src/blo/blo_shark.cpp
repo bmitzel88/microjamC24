@@ -61,6 +61,12 @@ namespace blo
             if (framesSinceEmerge >= framesPerStage * 2 + _window)
             {
                 _seal_sprite.set_visible(false);
+
+                // Survived the seal without hitting it
+                if (!_snack_stolen)
+                {
+                    _seal_survived = true;
+                }
             }
         }
         else if (isFakeout() && !isSealFakeout())
@@ -143,6 +149,11 @@ namespace blo
     bool shark::snack_stolen() const
     {
         return _snack_stolen;
+    }
+
+    bool shark::seal_survived() const
+    {
+        return _seal_survived;
     }
 
     /**

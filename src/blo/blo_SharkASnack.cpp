@@ -32,7 +32,7 @@ namespace blo
                                                                                                                          _shark(shark({-10, 20},
                                                                                                                                       _window_for(recommended_difficulty_level(completed_games, data)),
                                                                                                                                       _fakeout_for(recommended_difficulty_level(completed_games, data)),
-                                                                                                                                      _seal_fakeout(recommended_difficulty_level(completed_games, data)))),
+                                                                                                                                      _seal_fakeout(recommended_difficulty_level(completed_games, data), data))),
                                                                                                                          _background(bn::regular_bg_items::blo_ocean_bg.create_bg())
     {
     }
@@ -70,10 +70,11 @@ namespace blo
         return difficulty != mj::difficulty_level::EASY;
     };
 
-    // Checks if
-    bool blo_SharkASnack::_seal_fakeout(mj::difficulty_level difficulty)
+    // Checks if the seal is going to pop up instead of shark
+    bool blo_SharkASnack::_seal_fakeout(mj::difficulty_level difficulty, [[maybe_unused]] const mj::game_data &data)
     {
-        return difficulty == mj::difficulty_level::HARD;
+        // 50% chance for a seal round to accure on hard difficulty
+        return difficulty == mj::difficulty_level::HARD && data.random.get_int(2) == 0;
     };
 
     /**
@@ -107,7 +108,7 @@ namespace blo
      */
     bool blo_SharkASnack::victory() const
     {
-        return _shark.bonked();
+        return _shark.bonked() || _shark.seal_survived();
     };
 
     /**

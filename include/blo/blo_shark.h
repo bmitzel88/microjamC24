@@ -32,6 +32,9 @@ namespace blo
         // Checks to see if the shark stole the snack
         bool snack_stolen() const;
 
+        // Checks to see if the seal survived after emerging
+        bool seal_survived() const;
+
         // Checks to see if the shark is fully emerged (Ready to hit)
         bool isEmerged() const;
 
@@ -52,6 +55,7 @@ namespace blo
         int _fakeout_start = 240;
         int _fakeout_length = 30;
         bool _snack_stolen = false;
+        bool _seal_survived = false;
         bool _bonked = false;
         int _frames = 0;
         int _emerge_stage = 0;
