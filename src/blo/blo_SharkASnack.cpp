@@ -2,10 +2,12 @@
 
 #include "mj/mj_game_list.h"
 
+#include "bn_regular_bg_items_blo_ocean_bg.h"
+
 namespace
 {
     constexpr bn::string_view code_credits[] = {"Brandon Mitzel", "Logan Highley"};
-    constexpr bn::string_view graphics_credits[] = {""};
+    constexpr bn::string_view graphics_credits[] = {"Brandon Mitzel", "Logan Highley"};
     constexpr bn::string_view sfx_credits[] = {""};
     constexpr bn::string_view music_credits[] = {""};
 }
@@ -26,10 +28,11 @@ namespace blo
      * @param data shared information, such as a rng and number of frames left in the microgame
      */
     blo_SharkASnack::blo_SharkASnack([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("blo"),
-                                                                                                                         _player(player()),
-                                                                                                                         _shark(shark({0, 0},
+                                                                                                                         _player(player({28, -10})),
+                                                                                                                         _shark(shark({-10, 20},
                                                                                                                                       _window_for(recommended_difficulty_level(completed_games, data)),
-                                                                                                                                      _fakeout_for(recommended_difficulty_level(completed_games, data))))
+                                                                                                                                      _fakeout_for(recommended_difficulty_level(completed_games, data)))),
+                                                                                                                         _background(bn::regular_bg_items::blo_ocean_bg.create_bg())
     {
     }
 

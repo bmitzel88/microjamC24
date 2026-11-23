@@ -10,9 +10,12 @@ namespace blo
         /**
          * player constructor
          */
-        player();
+        player(bn::fixed_point starting_position);
 
-        void update(shark &target);
+        void update(shark &shark);
+
+    private:
+        bn::sprite_ptr _sprite;
     };
 
 }

@@ -4,6 +4,8 @@
 #define blo_SharkASnack_H
 
 #include "mj/mj_game.h"
+#include <bn_regular_bg_ptr.h>
+#include <bn_sprite_ptr.h>
 
 #include "blo/blo_player.h"
 #include "blo/blo_shark.h"
@@ -61,7 +63,7 @@ namespace blo
 
         /**
          * Called repeatedly as the game fades into view.
-         *
+         *"bn_regular_bg_items_blo_ocean_bg.h"
          * @param data shared information, such as a rng and number of frames left in the microgame
          */
         void fade_in(const mj::game_data &data) override;
@@ -76,6 +78,7 @@ namespace blo
     private:
         player _player;
         shark _shark;
+        bn::regular_bg_ptr _background;
     };
 }
 

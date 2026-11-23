@@ -64,6 +64,7 @@ namespace blo
             else
             {
                 _emerge_stage = 0;
+                _snack_stolen = true;
             }
         }
 
