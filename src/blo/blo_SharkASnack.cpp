@@ -31,7 +31,8 @@ namespace blo
                                                                                                                          _player(player({28, -10})),
                                                                                                                          _shark(shark({-10, 20},
                                                                                                                                       _window_for(recommended_difficulty_level(completed_games, data)),
-                                                                                                                                      _fakeout_for(recommended_difficulty_level(completed_games, data)))),
+                                                                                                                                      _fakeout_for(recommended_difficulty_level(completed_games, data)),
+                                                                                                                                      _seal_fakeout(recommended_difficulty_level(completed_games, data)))),
                                                                                                                          _background(bn::regular_bg_items::blo_ocean_bg.create_bg())
     {
     }
@@ -67,6 +68,12 @@ namespace blo
     bool blo_SharkASnack::_fakeout_for(mj::difficulty_level difficulty)
     {
         return difficulty != mj::difficulty_level::EASY;
+    };
+
+    // Checks if
+    bool blo_SharkASnack::_seal_fakeout(mj::difficulty_level difficulty)
+    {
+        return difficulty == mj::difficulty_level::HARD;
     };
 
     /**

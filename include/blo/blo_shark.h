@@ -1,5 +1,7 @@
 #pragma once
 
+#include <bn_sprite_animate_actions.h>
+
 #include <bn_fixed_point.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_item.h>
@@ -15,8 +17,9 @@ namespace blo
          * @param starting_position the location of the shark
          * @param window the timing window
          * @param has_fakeout if the shark will fakeout
+         * @param has_seal_fakeout if the seal (false enemy) will fakeout
          */
-        shark(bn::fixed_point starting_position, int window, bool has_fakeout);
+        shark(bn::fixed_point starting_position, int window, bool has_fakeout, bool has_seal_fakeout);
 
         void update();
 
@@ -35,11 +38,17 @@ namespace blo
         // Checks to see if the shark is doing a fakeout
         bool isFakeout() const;
 
+        // Checks to see if the seal (false enemy) is doing a fakeout
+        bool isSealFakeout() const;
+
     private:
         bn::sprite_ptr _sprite;
+        bn::sprite_ptr _seal_sprite;
+        bn::sprite_animate_action<3> _seal_animation; // Three frames
         int _emerge_start = 180;
         int _window;
         bool _has_fakeout;
+        bool _has_seal_fakeout;
         int _fakeout_start = 240;
         int _fakeout_length = 30;
         bool _snack_stolen = false;

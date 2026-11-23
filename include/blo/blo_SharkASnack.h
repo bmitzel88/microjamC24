@@ -38,6 +38,7 @@ namespace blo
         /**
          * If the dificulty is normal or above the shark gains a fakeout
          */
+        bool _seal_fakeout(mj::difficulty_level difficulty);
         static bool _fakeout_for(mj::difficulty_level difficulty);
 
         /**
