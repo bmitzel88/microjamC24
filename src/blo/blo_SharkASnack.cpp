@@ -98,6 +98,7 @@ namespace blo
         _player.update(_shark);
         _shark.update();
 
+        // This function ends the game when result returns true then checks if victory is true
         mj::game_result result(victory() || _shark.snack_stolen(), false);
         return result;
     };
